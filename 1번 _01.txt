@@ -1,0 +1,34 @@
+#include <stdio.h>
+
+using namespace std;
+
+static double cal_average(int start, int length, int data[]) {
+	double avg, sum = 0;
+	int count = 0;
+	while (count < length) {
+		sum += data[start];
+		start++; count++;
+	}
+	avg = sum / length;
+	return avg;
+}
+
+int main() {
+	int n, k;
+	int temp[5000];
+	double res, curavg;
+	scanf("%d %d", &n, &k);
+	
+	for (int i = 0; i < n; i++) {
+		scanf("%d", &temp[i]);
+	}
+	res = 0;
+	for (int i = k; i <= n; i++) {
+		for (int j = 0; j <= n - i; j++) {
+			curavg = cal_average(j, i, temp);
+			if (res < curavg) res = curavg;
+		}
+	}
+
+	printf("%f", res);
+}

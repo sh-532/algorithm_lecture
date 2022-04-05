@@ -1,0 +1,50 @@
+#include <stdio.h>
+
+using namespace std;
+
+static double cal_average(int start, int length, int data[]) {
+	double avg, sum = 0;
+	/*for (int i = start; i <= start+length; i++) {
+		sum += data[i];
+		//printf("sum = %lf\n", sum);
+	}
+	*/
+	int count = 0;
+	while (count < length) {
+		sum += data[start];
+		start++; count++;
+	}
+	avg = sum / length;
+	return avg;
+
+}
+
+
+int main() {
+	int n, k;
+	int temp[5000];
+	double maxavg, curavg;
+	do {
+		//printf("1 이상 5000 이하인 n과 k를 입력하세요\n");
+		scanf("%d %d", &n, &k);
+	} while (n>5000||k>5000||n<=0||k<=0||n<k);
+	// n과 k 입력받기
+
+	for (int i = 0; i < n; i++) {
+		scanf("%d", &temp[i]);
+		//printf("temp[ %d ]= %d\n", i, temp[i]);
+	}
+
+	maxavg = 0;
+
+	
+	for (int i = k; i <= n; i++) {
+		for (int j = 0; j <= n - i; j++) {
+			curavg = cal_average(j, i, temp);
+			//printf("temp[%d]에서 시작한 %d 길이의 cur avg is %lf\n", j, i, cur_avg);
+			if (maxavg < curavg) maxavg = curavg;
+		}
+	}
+
+	printf("heat intesity value : %lf", maxavg);
+}
